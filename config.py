@@ -1,5 +1,3 @@
-# ── Persona Universal Toolchain - Configuration ────────────────────────────────
-
 # Folder containing your input files (.pac, .bin, .fpc, .spr, .rmd, etc.)
 INPUT_DIR   = r"F:\Ripping\FILES\Persona 3 FES"
 
