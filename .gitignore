@@ -11,3 +11,5 @@ in/*
 
 out/*
 !out/.gitkeep
+
+config.py

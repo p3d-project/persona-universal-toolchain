@@ -38,7 +38,10 @@ _bvp = _load_pipeline_module("bvp_extract")
 _amd = _load_pipeline_module("amd_extract")
 
 import os as _os, importlib.util as _ilu
-_cfg_path = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "config.py")
+_here = _os.path.dirname(_os.path.abspath(__file__))
+_cfg_path = _os.path.join(_here, "config.py")
+if not _os.path.isfile(_cfg_path):
+    _cfg_path = _os.path.join(_here, "config.example.py")
 _spec = _ilu.spec_from_file_location("config", _cfg_path)
 _cfg  = _ilu.module_from_spec(_spec)
 _spec.loader.exec_module(_cfg)
@@ -63,7 +66,12 @@ import re as _re
 
 def save_config(**kwargs):
     try:
-        with open(_cfg_path, "r", encoding="utf-8") as f:
+        _here = os.path.dirname(os.path.abspath(__file__))
+        _save_path = os.path.join(_here, "config.py")
+        if not os.path.isfile(_save_path):
+            import shutil as _shutil
+            _shutil.copy2(_cfg_path, _save_path)
+        with open(_save_path, "r", encoding="utf-8") as f:
             lines = f.readlines()
         written = set()
         new_lines = []
@@ -90,7 +98,7 @@ def save_config(**kwargs):
                     new_lines.append(f"{key:<14}= {val}\n")
                 else:
                     new_lines.append(f"{key:<14}= {val!r}\n")
-        with open(_cfg_path, "w", encoding="utf-8") as f:
+        with open(_save_path, "w", encoding="utf-8") as f:
             f.writelines(new_lines)
     except Exception:
         pass
