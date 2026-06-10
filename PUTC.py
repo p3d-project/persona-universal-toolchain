@@ -1,6 +1,6 @@
 import sys
 import subprocess
-
+# test
 if sys.platform == "win32":
     try:
         import curses
