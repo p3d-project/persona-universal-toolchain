@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>RmdToGlb</AssemblyName>
+    <Nullable>enable</Nullable>
+    <LangVersion>10</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- Stop MSBuild scanning solution-level packages folders for assemblies -->
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="RmdToGlb_Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AmicitiaLibrary">
+      <HintPath>tools\rmdtoglb\AmicitiaLibrary.dll</HintPath>
+    </Reference>
+    <!-- Explicitly reference the 4.1.0 DLL that AmicitiaLibrary was compiled against.
+         The Specific Version + HintPath combination forces MSBuild to use this one
+         and ignore the stale 3.3.1 copy under tools\Amicitia-master\packages\. -->
+    <Reference Include="AssimpNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6">
+      <HintPath>tools\rmdtoglb\AssimpNet.dll</HintPath>
+      <SpecificVersion>true</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions"            Version="7.0.0" />
+    <PackageReference Include="System.Numerics.Vectors"                Version="4.5.0" />
+    <PackageReference Include="System.Drawing.Common"                  Version="7.0.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

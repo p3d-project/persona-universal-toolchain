@@ -1,0 +1,13 @@
+bin/
+obj/
+tools/
+*.log
+
+__pycache__/
+*.pyc
+
+in/*
+!in/.gitkeep
+
+out/*
+!out/.gitkeep
